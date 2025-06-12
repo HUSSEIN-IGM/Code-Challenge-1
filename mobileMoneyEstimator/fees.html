@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mobile Money Fee Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      padding: 30px;
+      color: #2c3e50;
+    }
+    h1 {
+      color: #16a085;
+    }
+    input, button {
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+      width: 250px;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #ecf0f1;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📱 Mobile Money Fee Calculator</h1>
+  <p>Enter the amount you want to send (KES):</p>
+
+  <input type="number" id="amountInput" placeholder="e.g., 500">
+  <br>
+  <button onclick="estimateTransactionFee()">Calculate Fee</button>
+
+  <div id="result"></div>
+
+  <script>
+    function estimateTransactionFee() {
+      const amount = Number(document.getElementById("amountInput").value);
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(amount) || amount <= 0) {
+        resultDiv.innerHTML = "<span style='color: red;'>Tafadhali ingiza kiasi halali (> 0).</span>";
+        return;
+      }
+
+      const feePercentage = 0.015; // 1.5%
+      let fee = amount * feePercentage;
+
+      if (fee < 10) {
+        fee = 10;
+      } else if (fee > 70) {
+        fee = 70;
+      }
+
+      const totalDebited = amount + fee;
+
+      resultDiv.innerHTML = `
+        <strong>Sending KES ${amount.toFixed(2)}:</strong><br><br>
+        Transaction Fee: <strong>KES ${fee.toFixed(2)}</strong><br>
+        Total Debited: <strong>KES ${totalDebited.toFixed(2)}</strong><br><br>
+        ✅ Send Money Securely!
+      `;
+    }
+  </script>
+
+</body>
+</html>

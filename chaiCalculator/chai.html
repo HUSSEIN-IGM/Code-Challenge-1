@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kenyan Chai Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 30px;
+      background-color: #fefefe;
+      color: #2c3e50;
+    }
+    h1 {
+      color: #8e44ad;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      width: 200px;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f3f3f3;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🥄 Kenyan Chai Bora Calculator</h1>
+  <p>Enter the number of cups you'd like to make:</p>
+
+  <input type="number" id="cups" placeholder="e.g., 2">
+  <br>
+  <button onclick="showChaiIngredients()">Calculate Ingredients</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateChaiIngredients(numberOfCups) {
+      const waterPerCup = 200;      // in ml
+      const milkPerCup = 50;        // in ml
+      const teaLeavesPerCup = 1;    // in tablespoons
+      const sugarPerCup = 2;        // in teaspoons
+
+      const totalWater = waterPerCup * numberOfCups;
+      const totalMilk = milkPerCup * numberOfCups;
+      const totalTeaLeaves = teaLeavesPerCup * numberOfCups;
+      const totalSugar = sugarPerCup * numberOfCups;
+
+      return `
+        <strong>To make ${numberOfCups} cup(s) of Kenyan Chai, you will need:</strong><br><br>
+        Water: ${totalWater} ml<br>
+        Milk: ${totalMilk} ml<br>
+        Tea Leaves (Majani): ${totalTeaLeaves} tablespoon(s)<br>
+        Sugar (Sukari): ${totalSugar} teaspoon(s)<br><br>
+        ☕ Enjoy your Chai Bora!
+      `;
+    }
+
+    function showChaiIngredients() {
+      const cups = Number(document.getElementById("cups").value);
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(cups) || cups <= 0) {
+        resultDiv.innerHTML = "<span style='color: red;'>Tafadhali ingiza nambari halali ya vikombe (> 0).</span>";
+      } else {
+        resultDiv.innerHTML = calculateChaiIngredients(cups);
+      }
+    }
+  </script>
+
+</body>
+</html>

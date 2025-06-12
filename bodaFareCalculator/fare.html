@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Boda Boda Fare Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fcfcfc;
+      padding: 30px;
+      color: #2c3e50;
+    }
+
+    h1 {
+      color: #d35400;
+    }
+
+    input, button {
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+      width: 250px;
+    }
+
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f4f4f4;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🏍️ Boda Boda Fare Calculator</h1>
+  <p>Unafika wapi Mkubwa? Ingiza umbali (kwa KM):</p>
+
+  <input type="number" id="distanceInput" placeholder="e.g., 3">
+  <br>
+  <button onclick="calculateBodaFare()">Calculate Fare</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateBodaFare() {
+      const distanceInKm = Number(document.getElementById("distanceInput").value);
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(distanceInKm) || distanceInKm <= 0) {
+        resultDiv.innerHTML = "<span style='color: red;'>Tafadhali ingiza umbali halali (> 0) kwa kilomita.</span>";
+        return;
+      }
+
+      const baseFare = 50;       // in KES
+      const perKmCharge = 15;    // in KES
+      const farePerDistance = distanceInKm * perKmCharge;
+      const totalFare = baseFare + farePerDistance;
+
+      resultDiv.innerHTML = `
+        <strong>Umbali: ${distanceInKm} km</strong><br><br>
+        Ukikalia Pikipiki: <strong>KES ${baseFare.toFixed(2)}</strong><br>
+        Mpaka Uko: <strong>KES ${farePerDistance.toFixed(2)}</strong><br>
+        <hr>
+        <strong>Total Fare: KES ${totalFare.toFixed(2)}</strong><br><br>
+        🛵 Panda Pikipiki Salama!
+      `;
+    }
+  </script>
+
+</body>
+</html>
